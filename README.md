@@ -30,7 +30,7 @@ SQL injection happens when:
 
 If strange input causes the website to return more data than intended, that is a vulnerability.
 
-This scripot detects that behaviour by comparing responses.
+This script detects that behaviour by comparing responses.
 
 ---
 
@@ -61,7 +61,7 @@ http://localhost:8080
 Login with:
 
 ```
-username: admiin
+username: admin
 password: password
 ```
 
@@ -76,3 +76,67 @@ Then:
 
 ## Getting You Session Cookie
 
+DVWA requires you to be logged in.
+
+1. Log in to DVWA in your browser
+2. Open browser Developer Tools
+3. Go to **Application / Storage**, then to **Cookies**
+4. Copy the value of `PHPSESSID`
+5. Paste it into the script where indicated (`PASTE_YOURS_HERE`)
+
+---
+
+## Script Behaviour (What It Does)
+
+The script performs three main steps:
+
+1. Sends a normal request (expected behavious)
+2. Sends a SQL injection request (`1 OR 1=1`)
+3. Compares the size of the responses
+
+If the injection response is much larger, it suggests that:
+
+- More database records were returned
+- The site is vulnerable to SQL injection
+
+---
+
+## Running The Script
+
+Install dependencies:
+
+```
+pip install requests
+```
+
+Run the script:
+
+```
+python3 dvwa_sql_injection_detection.py
+```
+
+Example Output
+
+```
+Normal request length: 3200
+Injection request length: 9400
+Possible SQL injection detected!
+```
+
+---
+
+## Ethical & Legal Notice
+
+Do **not** run this script against:
+
+- Real websites
+- Systems you do not own
+- Systems without explicit permission
+
+This project focuses on understanding behaviour, not exploiting systems.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/coder0name0dre/dvwa_sql_injection_detection/blob/main/LICENSE).
