@@ -57,7 +57,7 @@ print("Injection request length:", injected_length)
 
 # Compare results #
 
-# If the injection response is significantly larger, it means the database returned more data than intended
+# If the injection response is significantly larger, it means the database returned more data than intended.
 # This strongly suggests SQL injection
 if injected_length > normal_length:
     print("Possible SQL injection detected!")
